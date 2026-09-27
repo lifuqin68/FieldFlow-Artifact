@@ -1,34 +1,32 @@
 # FieldFlow research artifact
 
-Download the current artifact ZIP (SHA-256 `279524d6b5316a7f2fb6aa1cf490f976b6a245e71fff601309ba5adb0fa0511d`). Extract on
-64-bit Windows 10/11 with PowerShell 5.1+. Nothing needs to be built or
-installed for the core experiments — the seven FieldFlow executables ship in
-`tool/`.
+This repository hosts the research artifact for the ICSOC 2026 paper **“FieldFlow: Member-SSA for Field-Sensitive Taint Analysis of Service Code.”**
+
+[Download the latest release](https://github.com/lifuqin68/FieldFlow-Artifact/releases). The ZIP contains seven pre-built FieldFlow executables, benchmarks, case suites, the three RQ4 production systems, driver scripts, baseline configurations, and reference outputs. Its root `README.md` provides the commands and expected results for every experiment.
+
+## Quick check
+
+Extract the ZIP on **64-bit Windows 10/11 with PowerShell 5.1+**. From the extracted directory, run:
 
 ```powershell
 powershell -File scripts\verify.ps1
 ```
 
-That reproduces four of the paper's experiments — RQ2 in Java, Go and PHP, plus
-RQ3 — checks each against the figure the main paper reports, and prints `PASS`
-or `FAIL` per line in about 90 seconds.
+In about 90 seconds, this checks RQ2 in Java, Go, and PHP, plus the **FF-Full configuration of RQ3**. It prints `PASS` or `FAIL` for each check. Only the executables included in the ZIP are needed. The ZIP's README gives separate commands for the other RQ3 configurations and the RQ1 and RQ4 experiments.
 
-The ZIP also carries the two public benchmarks for RQ1 (SecuriBench Micro, 123
-cases; OWASP Benchmark v1.2, 945 No-CP cases), the three production systems at
-the exact revisions analysed for RQ4 (Train-Ticket, mall-swarm, Apache OFBiz),
-every case suite and baseline configuration, and the reference output of every
-reported run — so any run can be diffed against what the paper reports.
+## Baseline tools
 
-The four baseline comparisons (CodeQL, FlowDroid, gosec, Semgrep) are **not**
-redistributed. They need those toolchains installed at the versions the README
-pins, plus a JRE 8 for FlowDroid's boot classpath, and a Maven build of the OWASP
-benchmark. RQ1 and RQ4 then take from a few minutes to about an hour.
+The ZIP includes baseline configurations, scripts, and reference outputs, but **not the baseline tools themselves**. To rerun the baseline comparisons, install the versions and prerequisites documented in the ZIP's README:
 
-The prototype is delivered **as pre-built binaries only** — no source and no
-build step — so the reported results are reproducible and verifiable, but the
-implementation cannot be inspected or rebuilt. The executables are Windows PE
-binaries; there is no Linux build and no container image.
+- CodeQL 2.23.7;
+- FlowDroid 2.13, JDK 21, and a JRE 8 for its boot classpath;
+- gosec v2.29.0;
+- Docker and the `semgrep/semgrep:1.167.0` image.
 
-See the README inside the ZIP for the step-by-step guide, the expected number
-for every suite, tool prerequisites, licensing and data provenance.
+The OWASP CodeQL and FlowDroid baselines also require building the included OWASP Benchmark source with Maven. These baseline tools are **not required** for the quick check or the FieldFlow experiments.
 
+## Scope and limitations
+
+FieldFlow is supplied as pre-built Windows executables only; its source code is not included. Reviewers can run the experiments and compare their outputs with the reference results, but cannot inspect the implementation or rebuild the tool from source. No Linux build or container image is provided.
+
+See the ZIP's root `README.md` for the complete reproduction guide, data provenance, known limitations, and licensing information for each artifact component.
