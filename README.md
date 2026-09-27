@@ -1,6 +1,6 @@
 # FieldFlow research artifact
 
-This repository hosts the research artifact for the ICSOC 2026 paper **'FieldFlow: Member-SSA for Field-Sensitive Taint Analysis of Service Code.'**
+This repository hosts the research artifact for the ICSOC 2026 paper **'FieldFlow: Member-SSA for Field-Sensitive Taint Analysis of Service Code'.**
 
 [Download the latest release](https://github.com/lifuqin68/FieldFlow-Artifact/releases). The ZIP contains seven pre-built FieldFlow executables, benchmarks, case suites, the three RQ4 production systems, driver scripts, baseline configurations, and reference outputs. Its root `README.md` provides the commands and expected results for every experiment.
 
